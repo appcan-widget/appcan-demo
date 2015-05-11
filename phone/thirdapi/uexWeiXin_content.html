@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">    <link rel="stylesheet" href="../css/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/ui-base.css">
+    <link rel="stylesheet" href="../css/ui-box.css">
+    <link rel="stylesheet" href="../css/ui-color.css">
+    <link rel="stylesheet" href="../css/appcan.icon.css">
+    <link rel="stylesheet" href="../css/appcan.control.css">
+    <link rel="stylesheet" href="../css/project/new.css">
+</head>
+<body class="um-vp c-wh-pLG" ontouchstart>
+<div class="conbor uof sc-bg">
+    <div class="consj"> 
+        <div class="uin9">
+        <span class="ulev2">微信</span><span class="ulev-1">(此页面因安全问题已加密)</span>
+        </div>
+        
+        <div class="uin8">分享文本</div>
+        <div class="uinn">
+         <div class="select uba bc-border bc-text">
+                    <div class="text">
+                        分享给指定好友
+                    </div>
+                    <div class="icon"></div>
+                    <select selectedindex="0">
+                        <option value="0">分享给指定好友</option>
+                        <option value="1">分享到朋友圈</option>
+                    </select>
+                </div>
+                </div>
+                <div class="uin8">
+                    文本内容
+                </div>
+                <div class="c-wh ubb ubt bc-border  uinput ub ub-f1">
+                    <div class="umw1-7"></div>
+                    <textarea placeholder="hello,appcan" type="text" class="ub-f1 font-c" style="min-height: 3em" id="shareContent">AppCan.cn 一站式移动开发服务平台对微信分享支持测试</textarea>
+                    <div class="umw1-7"></div>
+                </div>
+        <div class="umh1"></div>
+        <div class="uin">
+            <div class="ub btn bc-text-head bc-btn ub-ac ub-pc"  onclick="shareText();">分享文本</div>
+        </div>        
+        <div class="umh1"></div>
+        
+        
+    </div>
+</div>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>	
+</body>
+<script>
+var cText = 0;
+var cJson = 1;
+var cInt = 2;
+var appId = "wx2cffb2e8a4cc49f1";
+var app_serect = "b2bd7188754bc87ec5d4881a8fa73734";
+var app_key = "L8LrMqqeGRxST5reouB0K66CaYAWpqhAVsq7ggKkxHCOastWksvuX1uvmvQclxaHoYd3ElNBrNO2DHnnzgfVG9Qs473M3DTOZug5er46FhuGofumV8H2FVR9qkjSlC5K";
+var partnerId = "1900000109";
+var traceId = "crestxu_test";
+var packageValue = "bank_type=WX&body=%E5%8D%83%E8%B6%B3%E9%87%91%E7%AE%8D%E6%A3%92&fee_type=1&input_charset=UTF-8&notify_url=http%3A%2F%2Fweixin.qq.com&out_trade_no=9d86d83f925f2149e9edb0ac3b49229c&partner=1900000109&spbill_create_ip=196.168.1.1&total_fee=1&sign=899815E4F3106CC5DCFAF76A4D16069B";
+
+appcan.ready(function(){
+    
+    uexWeiXin.registerApp(appId);
+    uexWeiXin.cbRegisterApp =function(opCode,dataType,data)
+    {
+        //0支持，1 不支持
+        if(data == "1"){
+            alert('注册失败！');
+        }
+    }
+    uexWeiXin.cbIsSupportPay =function(opCode,dataType,data)
+    {
+        //0支持，1 不支持
+        alert("cbIsSupportPay："+data);
+    }
+    uexWeiXin.cbGotoPay = function(opCode,dataType,data)
+    {
+        //如果datatype是0说明返回的data是整数0，意味着支付成功了。
+        //如果datatype是2说明返回的data是字符串，意味着支付失败了。data就是失败信息
+        console.log("cbGotoPay");
+        alert("cbGotoPay："+data);
+    }
+    
+    uexWeiXin.cbGenerateAdvanceOrder = function(opCode,dataType,data)
+    {
+        alert("cbGenerateAdvanceOrder："+data);
+    }
+    
+    uexWeiXin.cbGetAccessToken = function(opCode,dataType,data)
+    {
+       alert("cbGetAccessToken："+data);
+    }
+    
+    
+    uexWeiXin.cbGetAccessTokenLocal = function(opCode,dataType,data)
+    {
+       alert("cbGetAccessTokenLocal:"+data);
+    }
+    
+    uexWeiXin.cbIsWXAppInstalled=function(opCode,dataType,data){
+        alert("cbIsWXAppInstalled："+data);
+    };
+    uexWeiXin.cbGetWXAppInstallUrl=function(opCode,dataType,data){
+        alert("cbGetWXAppInstallUrl："+data);
+    };
+
+    //是否安装微信客户端
+    uexWeiXin.cbIsWXAppInstalled = function(opCode, dataType, data){
+        alert("cbIsWXAppInstalled：" + data);
+    };
+    //获取微信在appstore的下载地址。【iOS专用】
+    uexWeiXin.cbGetWXAppInstallUrl = function(opCode, dataType, data){
+         alert("cbGetWXAppInstallUrl：" + data);
+    };
+    //分享文本是否成功的状态
+    uexWeiXin.cbSendTextContent = function(opCode, dataType, data){
+         //data是状态码
+         if(Number(data)==0){
+                alert('分享成功')
+            }else
+                alert('分享失败');
+    };
+    //分享图片是否成功的状态
+    uexWeiXin.cbSendImageContent = function(opCode, dataType, data){
+        //data是状态码
+        if(Number(data)==0){
+                alert('分享成功')
+            }else
+                alert('分享失败');
+    };
+    uexWidget.onAppResume = onAppResume;
+})
+var type = '0';
+    appcan.select(".select",function(ele,value){
+        type = value;
+    });
+    function onAppResume(){
+        console.log("onAppResume"); 
+    }
+   //分享文本，支持分享到朋友圈与用户好友
+   function shareText(){
+       var txt = $('#shareContent').val();
+       uexWeiXin.sendTextContent(type, txt);
+   }
+   //分享图片，支持分享到朋友圈与用户好友
+   function sharePic(){
+        var thumImgPath = $('#sharepic').val();
+        var realImgPath = $('#sharepic').val();
+        //分享场景 0：对话  1：朋友圈
+        uexWeiXin.sendImageContent(type, thumImgPath, realImgPath,"","","");
+    } 
+    function getAccessToken(){
+        uexWeiXin.getAccessToken(appId,app_serect); 
+    }        
+    function generateAdvanceOrder(){
+        var JsonStr = document.getElementById("showAccess_token").innerHTML;
+        var token = JSON.parse(JsonStr).access_token;
+        uexWeiXin.generatePrepayID(token,app_key,packageValue);
+    }
+    function gotoPay(){
+        var JsonStr = document.getElementById("showOrderInfo").innerHTML;
+        var prepayid = JSON.parse(JsonStr).prepayid;
+        uexWeiXin.sendPay(partnerId,prepayid,app_key,packageValue);
+    }
+appcan.button(".btn", "ani-act", function() {
+        })
+        </script>
+</html>

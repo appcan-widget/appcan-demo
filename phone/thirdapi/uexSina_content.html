@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">    <link rel="stylesheet" href="../css/ui-base.css">
+    <link rel="stylesheet" href="../css/ui-box.css">
+    <link rel="stylesheet" href="../css/ui-color.css">
+    <link rel="stylesheet" href="../css/appcan.control.css">
+    <link rel="stylesheet" href="../css/project/new.css">
+</head>
+<body class="um-vp c-wh-pLG" ontouchstart>
+<div class="conbor">
+            <div class="consj">
+                <div class=" uin9">
+                    <span class="ulev2">新浪微博</span><span class="ulev-1">(此页面因安全问题已加密)</span>
+                </div>
+                <div class="uin8">
+                    注册/登录
+                </div>
+                <div class="uin">
+                    <div class="ub btn bc-text-head bc-btn ub-ac ub-pc"   onclick="register();">
+                        注册/登录
+                    </div>
+                </div>
+
+                <div class="uin8">
+                    发表内容
+                </div>
+                <div class="c-wh ubb ubt bc-border  uinput ub ub-f1">
+                    <div class="umw1-7"></div>
+                    <textarea placeholder="hello,appcan" type="text" class="ub-f1 font-c" style="min-height: 3em" id="shareContent">AppCan.cn_一站式移动开发服务平台对新浪微博分享支持测试</textarea>
+                    <div class="umw1-7"></div>
+                </div>
+                <div class="umh1"></div>
+                <div class="uin10">
+                    图片路径
+                </div>
+                <div class="c-wh ubb ubt bc-border  uinput ub ub-f1">
+                    <div class="umw1-7"></div>
+                    <textarea placeholder="hello,appcan" type="text" class="ub-f1 font-c" style="min-height: 3em" id="sharepic">res://appcan.jpg</textarea>
+                    <div class="umw1-7"></div>
+                </div>
+                <div class="umh1"></div>
+                <div class="uin">
+                    <div class="ub btn bc-text-head bc-btn ub-ac ub-pc"   onclick="sharePic();">
+                        分享
+                    </div>
+                </div>
+                <div class="umh1"></div>
+                <div class="ulev-1 kuohao">(分享图片，以及文字，如果图片地址为http://则必须在新浪申请高级权限)</div>
+                <div class="umh1"></div>
+            </div>
+        </div>
+<script src="../js/appcan.js"></script>
+<script src="../js/appcan.control.js"></script>	
+</body>
+<script>
+var cText = 0;
+var cJson = 1;
+var cInt = 2;
+
+    appcan.ready(function(){
+        appcan.initBounce();
+        uexSina.cbShare=function(opCode,dataType,data){
+            //document.getElementById("showStatus").innerHTML = "返回分享状态码:"+data;
+            appcan.window.alert({
+                    title : "提示",
+                    content : "分享成功",
+                    buttons : '确定'
+                });
+        };
+        
+        uexSina.registerCallBack = function(opCode,dataType,data){
+           if(Number(data)==0){
+                alert('登录成功')
+            }else
+                alert('登录失败');
+        }
+    })
+    function shareText(){
+        //分享文字
+        var txt = $('#shareContent').html();
+        uexSina.sendTextContent(txt);
+    }
+    function sharePic(){
+        var content = $('#shareContent').html();
+        var realImgPath = $('#sharepic').html();//http:// 本地
+        uexSina.sendImageContent(realImgPath,content);
+    }
+    function register(){
+        
+        var appKey = "3845409824";
+        var appSecret = "6baa661d49374c9da3ea9cab1c406ab6";
+        var registerUrl = "https://api.weibo.com/oauth2/default.html";
+        uexSina.registerApp(appKey,appSecret,registerUrl);
+    }
+appcan.button(".btn", "ani-act", function() {
+
+        })
+ </script>
+</html>
