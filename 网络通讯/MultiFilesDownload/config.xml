@@ -6,7 +6,7 @@
 	<author email=""> </author>
 	<icon src="icon.png"/>
 	<license href=""/>
-	<content encoding="utf-8" src="uexDownloaderMgr_1.html"/>
+	<content encoding="utf-8" src="uexDownloaderMgr.html"/>
 	<updateurl/>
 	<logserverip>192.168.1.38</logserverip> 
 	<showmyspace>false</showmyspace>

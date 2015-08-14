@@ -7,4 +7,4 @@
 |  文件目录 | 说明  | 
 | ------------ | ------------ | 
 | phone | appcan demo |
-| MutiFileDownload | 一个多文件下载的case |
+| 网络通讯\MultiFilesDownload | 一个多文件下载的case |
